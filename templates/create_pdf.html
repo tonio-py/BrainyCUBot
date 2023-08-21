@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="{{url_for('static', filename='css/output.css')}}" />
+		<title>Create question</title>
+	</head>
+	<body>
+		<section>
+			<div
+				class="max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16 mx-auto"
+			>
+				<div class="grid grid-cols-1 gap-y-8 items-center lg:gap-x-16">
+					<div class="mx-auto max-w-2xl text-center">
+						<h2 class="text-3xl font-bold sm:text-4xl">Quiz Creation Panel</h2>
+					</div>
+				</div>
+				<main class="max-w-4xl mx-auto  mt-16 rounded-sm">
+					<form method="POST" action="/create_course_pdf" class="max-w-lg mx-auto"  enctype="multipart/form-data">
+						<div class="mb-6">
+							<label
+								for="course"
+								class="block mb-2 text-sm font-medium text-gray-900 "
+								> Select</label
+							>
+							<input
+								type="file"
+								id="slide"
+								name="slide"
+								class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+								required
+							/>
+						</div>
+						<div class="mb-6">
+							<label
+								for="quizzes"
+								class="block mb-2 text-sm font-medium text-gray-900 "
+								>Number of Quiz Questions</label
+							>
+							<input
+								type="number"
+								id="text"
+								name="quizzes"
+								placeholder="Number of quiz questions per each lesson"
+								class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+								required
+							/>
+						</div>
+						<div class="flex items-start mb-6">
+						
+						<button
+							type="submit"
+							class="text-white text-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg w-full px-5 py-2.5 text-center "
+						>
+							Generate Quiz
+						</button>
+					</form>
+					{% with messages = get_flashed_messages(with_categories=true) %}
+					{% if messages %}
+					<div class="flash-messages">
+						{% for category,  message in messages %}
+						<div class="flash-message {{ category }}">{{ message }}</div>
+						{% endfor %}
+					</div>
+					{% endif %}
+					{% endwith %}
+				</main>
+			</div>
+		</section>
+	</body>
+</html>

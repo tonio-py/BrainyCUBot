@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="{{url_for('static', filename='css/output.css')}}" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>courses</title>
+	</head>
+	<body>
+		<section>
+			<div
+				class="max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16 mx-auto"
+			>
+				<div class="grid grid-cols-1 gap-y-8 items-center lg:gap-x-16">
+					<div class="mx-auto max-w-2xl text-center">
+						<h2 class="text-3xl font-bold sm:text-4xl">
+							Find your Quizzes here
+						</h2>
+
+						<p class="mt-4 text-gray-600">
+							All the Chatbots Quizes are generated in here
+						</p>
+
+						<a
+							href="#courses"
+							class="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
+						>
+							Get Started Today
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<main
+			id="courses"
+			class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl flex-wrap p-4 mx-auto"
+		>
+		{% for quiz in quizzes %}
+			<a href="/start_quiz/{{ quiz.id }}" class="max-w-sm inline-block">
+				<article
+					class="group relative overflow-hidden rounded-lg shadow transition hover:shadow-lg h-64 flex"
+				>
+					<img
+						alt="Office"
+						src="https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
+						class="absolute inset-0 h-full w-full object-cover"
+					/>
+
+					<div
+						class="relative bg-gradient-to-t from-gray-900/80 to-gray-900/70 flex items-end"
+					>
+						<div
+							class="p-4 sm:p-6 translate-y-11 group-hover:translate-y-0 duration-300"
+						>
+							<span
+								class="bg-yellow-600 p-1.5 block text-xs text-white/90 w-fit rounded-md font-medium"
+							>
+								Year 4 Semester 2
+							</span>
+
+							<h3 class="mt-0.5 text-lg text-white font-bold">
+								{{ quiz.title }}
+							</h3>
+
+							<p
+								class="mt-2 line-clamp-3 text-sm/relaxed text-gray-400 transition-transform duration-300 group-hover:translate-y-0 translate-y-full"
+							>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+								Recusandae dolores, possimus pariatur animi temporibus nesciunt
+								praesentium dolore sed nulla ipsum eveniet corporis quidem,
+								mollitia itaque minus soluta, voluptates neque explicabo tempora
+								nisi culpa eius atque dignissimos. Molestias explicabo corporis
+								voluptatem?
+							</p>
+						</div>
+					</div>
+				</article>
+			</a>
+			{% endfor %}
+		</main>
+	</body>
+</html>
