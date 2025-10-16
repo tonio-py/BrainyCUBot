@@ -62,3 +62,5 @@ WTForms==2.3.3
 wtforms-html5==0.6.1
 XlsxWriter==3.1.2
 yarl==1.9.2
+requests==2.31.0
+gunicorn==20.1.0
