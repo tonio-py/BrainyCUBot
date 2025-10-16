@@ -38,13 +38,27 @@ from flask_login import UserMixin
 #instantiate application and database
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/pdfFiles/'
-app.config['SECRET_KEY'] = 'edem-and-antonio'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost/lms_chatbot'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024  # 30 MB limit
-openai.api_key = os.environ.get('OPEN_AI_KEY')
 
+# ----------------------------
+# Secret Key
+# ----------------------------
+# Use environment variable on Render; fallback for local testing
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fallback-secret-key')
+
+# ----------------------------
+# Database configuration
+# ----------------------------
+# Use environment variables for all database credentials
+db_user = os.environ.get('DB_USER', 'postgres')
+db_password = os.environ.get('DB_PASSWORD', 'password')
+db_host = os.environ.get('DB_HOST', 'localhost')
+db_name = os.environ.get('DB_NAME', 'lms_chatbot')
+
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{db_user}:{db_password}@{db_host}/{db_name}'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+openai.api_key = os.environ.get('OPEN_AI_KEY')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
